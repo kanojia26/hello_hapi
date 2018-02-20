@@ -1,35 +1,31 @@
 'use strict';
+const Hapi   = require('hapi');
+const Server = new Hapi.Server();
+const Hello  = require('./lib/hello');
 
-const Hapi = require('hapi');
+Server.connection({ port: 3000 });
 
-// Create a server with a host and port
-const server = Hapi.server({ 
-    host: 'localhost', 
-    port: 8000 
-});
-
-// Add the route
-server.route({
+Server.route({
     method: 'GET',
-    path:'/hello', 
-    handler: function (request, h) {
+    path: '/hello/{user}',
+    handler: function (request, reply) {
 
-        return 'hello world';
+        const result = Hello(decodeURIComponent(request.params.user));
+        reply(result);
     }
 });
 
-// Start the server
-async function start() {
+// don't start server if this file was required
 
-    try {
-        await server.start();
-    }
-    catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
+if (!module.parent) {
 
-    console.log('Server running at:', server.info.uri);
-};
+    Server.start((err) => {
 
-start();
+        if (err) {
+            throw err;
+        }
+        console.log(`Server running at: ${Server.info.uri}`);
+    });
+}
+
+module.exports = Server;
