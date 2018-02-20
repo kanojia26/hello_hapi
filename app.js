@@ -17,15 +17,30 @@ Server.route({
 
 // don't start server if this file was required
 
-if (!module.parent) {
+//if (!module.parent) {
 
-    Server.start((err) => {
+ //   Server.start((err) => {
 
-        if (err) {
-            throw err;
-        }
-        console.log(`Server running at: ${Server.info.uri}`);
-    });
-}
+ //       if (err) {
+ //           throw err;
+ //       }
+//        console.log(`Server running at: ${Server.info.uri}`);
+//    });
+//}
 
-module.exports = Server;
+module.exports = server;
+// Start the server
+async function start() {
+
+    try {
+        await server.start();
+    }
+    catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
+
+    console.log('Server running at:', server.info.uri);
+};
+
+start();
