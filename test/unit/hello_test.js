@@ -4,7 +4,7 @@ const Lab   = require('lab');
 const lab   = exports.lab = Lab.script();
 const Hello = require('../../lib/hello.js');
 
-lab.experiment('test greetings', () => {
+lab.experiment('test kanojia docker', () => {
 
     lab.test('greets with name ', (done) => {
 
