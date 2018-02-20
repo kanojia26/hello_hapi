@@ -28,19 +28,19 @@ Server.route({
 //    });
 //}
 
-module.exports = server;
+module.exports = Server;
 // Start the server
 async function start() {
 
     try {
-        await server.start();
+        await Server.start();
     }
     catch (err) {
         console.log(err);
         process.exit(1);
     }
 
-    console.log('Server running at:', server.info.uri);
+    console.log('Server running at:', Server.info.uri);
 };
 
 start();
