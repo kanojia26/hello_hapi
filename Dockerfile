@@ -1,5 +1,5 @@
 # use the latest node LTS release
-FROM node:8.9.4
+FROM node:8
 WORKDIR /usr/src/app
 
 # copy package.json and package-lock.json and install packages. we do this
